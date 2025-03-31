@@ -2,20 +2,22 @@ import socket
 import json
 import pyodbc
 import sqlite3
+from bancoDeDados import conexao, tabela
 
 # Configuração do banco de dados
-server = 'SERVDB4\\SQLEXPRESS'
-database = 'teste'
-username = 'sa'
-password = 'Luan@1983'
+#server = 'SERVDB4\\SQLEXPRESS'
+#database = 'teste'
+#username = 'sa'
+#password = ''
 
-conn_str = f"DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password}"
-conn = pyodbc.connect(conn_str)
+#conn_str = f"DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conexao())
 cursor = conn.cursor()
 
+tabela = tabela()
 
 def consultar_automoveis(filtros):
-    query = "SELECT * FROM automoveis WHERE 1=1"
+    query = f"SELECT * FROM {tabela} WHERE 1=1"
 
     if 'marca' in filtros:
         query += f" AND marca = '{filtros['marca']}'"
@@ -63,10 +65,10 @@ def servidor():
     if dados_recebidos:
         filtros = json.loads(dados_recebidos.decode())
         print(filtros)
-        conn = pyodbc.connect(conn_str)
+        conn = pyodbc.connect(conexao())
         cursor = conn.cursor()
 
-        query = "SELECT * FROM automoveis WHERE 1=1"
+        query = f"SELECT * FROM {tabela} WHERE 1=1"
 
         if filtros["marca"]:
             query += f" AND marca LIKE '{filtros['marca']}%'"

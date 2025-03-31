@@ -4,20 +4,22 @@ import random
 import pandas as pd
 import sqlalchemy as db
 import pyodbc
+from bancoDeDados import conexao, tabela
 
 fake = Faker("pt_BR")
 
-server = 'SERVDB4\\SQLEXPRESS'
-database = "teste"
-username = "sa"
-password = "Luan@1983"
+#server = 'SERVDB4\\SQLEXPRESS'
+#database = "teste"
+#username = "sa"
+#password = ""
 
-conn_str = f"DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password}"
-conn = pyodbc.connect(conn_str)
+#conn_str = f"DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conexao())
 cursor = conn.cursor()
 
 #conectSqlAchemy = db.create_engine(f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+17+for+SQL+Server")
 
+tabela = tabela()
 
 def gerar_automovel():
     return Automovel(
@@ -56,8 +58,8 @@ print(df_veiculos)
 
 #try:
 for index, veiculo in df_veiculos.iterrows():
-    cursor.execute("""
-        INSERT INTO automoveis(marca, modelo, ano, motorizacao, combustivel, cor, quilometragem, portas, transmissao, corDoInterior, preco) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    cursor.execute(f"""
+        INSERT INTO {tabela}(marca, modelo, ano, motorizacao, combustivel, cor, quilometragem, portas, transmissao, corDoInterior, preco) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          """, veiculo['marca'], veiculo['modelo'], veiculo['ano'], veiculo['motorizacao'], veiculo['combustivel'], veiculo['cor'], veiculo['quilometragem'], veiculo['portas'],
                        veiculo['transmissao'], veiculo['corDoInterior'], veiculo['preco'])
 
