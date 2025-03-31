@@ -1,0 +1,14 @@
+##COMO EXECUTAR##
+
+1º Faça o donwload do repositório e extraia os arquivos
+
+2º Executa o script: 
+CREATE TABLE automoveis ( id INT IDENTITY(1,1) PRIMARY KEY, marca VARCHAR(100), modelo VARCHAR(100), ano INT, motorizacao VARCHAR(50), combustivel VARCHAR(50), cor VARCHAR(50), quilometragem INT, portas INT, transmissao VARCHAR(50), corDoInterior VARCHAR(50) );
+
+OBS: A execução desse codigo foi feito em SQL Server, se for rodar a aplicação utilizando MySQL, PostGre ou qualquer outro, você deve alterar as dependencias
+
+3° Com a tabela criada no banco, você deve alterar no arquivo bancoDeDados.py as informações do banco de dados, servidor, database, username, password e tabela
+
+4º Executar o script server.py para iniciar o servidor e receber as requisições
+
+5º Executar o script client.py para iniciar o programa e enviar os dados para a busca
