@@ -9,6 +9,6 @@ OBS: A execução desse codigo foi feito em SQL Server, se for rodar a aplicaç�
 
 3° Com a tabela criada no banco, você deve alterar no arquivo bancoDeDados.py as informações do banco de dados, servidor, database, username, password e tabela
 
-4º Executar o script server.py para iniciar o servidor e receber as requisições
+4º Utilizando uma IDE você deve xecutar o script server.py para iniciar o servidor e receber as requisições
 
-5º Executar o script client.py para iniciar o programa e enviar os dados para a busca
+5º O mesmo para executar o script client.py, assim irá iniciar o programa e enviar os dados para a busca
